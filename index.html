@@ -10,12 +10,16 @@
 	</body>
 	<canvas id="canvas" height="1080" width="1920">3D Ball</canvas>
 	<script>
-	var width = 1410;
-	var height = 800;
+	var width = 1420;
+	var height = 810;
 	var canvas = ctx = false;
 	var frameRate = 1/40;
 	var frameDelay = frameRate * 1000;
 	var loopTimer = false;
+	var img = new Image();
+	img.src = 'ball.png';
+	img.width = 10;
+	img.height = 10;
 	var ball = {
 	    position: {x: width/2, y: 0},
 	    velocity: {x: 10, y: 0},
@@ -24,6 +28,7 @@
 	    restitution: -0.7
 	    };
 	var Cd = 0.47;
+	var snd = new Audio("bounce.mp3");
 	var rho = 1.22;
 	var A = Math.PI * ball.radius * ball.radius / (10000);
 	var ag = 9.81;
@@ -76,9 +81,15 @@
 	        ball.position.x += ball.velocity.x*frameRate*100;
 	        ball.position.y += ball.velocity.y*frameRate*100;
 	    }
+	    // if (ball.position.y > height - ball.radius){
+	    // 	snd.play();
+	    // }
+	    // if (ball.velocity.x == 0 && ball.velocity.y == 0) {
+	    // 	snd.pause();
+	    // }
 	    if (ball.position.y > height - ball.radius) {
 	        ball.velocity.y *= ball.restitution;
-	        ball.position.y = height - ball.radius;
+	        ball.position.y = height - ball.radius; 
 	    }
 	    if (ball.position.x > width - ball.radius) {
 	        ball.velocity.x *= ball.restitution;
@@ -92,13 +103,14 @@
 	    ctx.save();
 	    ctx.translate(ball.position.x, ball.position.y);
 	    ctx.beginPath();
-	    ctx.arc(0, 0, ball.radius, 0, Math.PI*2, true);
+	    //ctx.arc(0, 0, ball.radius, 0, Math.PI*2, true);
+	    ctx.drawImage(img, -20, -20, 45, 45);
 	    ctx.fill();
 	    ctx.closePath();
 	    ctx.restore();
 	    ctx.fillStyle = "blue";
         ctx.font = "20px Arial";
-        ctx.fillText(msg, 228,390);
+        ctx.fillText(msg, 1300,20);
 
 	    if (mouse.isDown) {
 	        ctx.beginPath();
