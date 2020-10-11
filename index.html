@@ -81,12 +81,12 @@
 	        ball.position.x += ball.velocity.x*frameRate*100;
 	        ball.position.y += ball.velocity.y*frameRate*100;
 	    }
-	    // if (ball.position.y > height - ball.radius){
-	    // 	snd.play();
-	    // }
-	    // if (ball.velocity.x == 0 && ball.velocity.y == 0) {
-	    // 	snd.pause();
-	    // }
+	    if (ball.position.y > height - ball.radius){
+	     	snd.play();
+	     }
+	    if (ball.velocity.x == 0 && ball.velocity.y == 0) {
+	     	snd.pause();
+	    }
 	    if (ball.position.y > height - ball.radius) {
 	        ball.velocity.y *= ball.restitution;
 	        ball.position.y = height - ball.radius; 
